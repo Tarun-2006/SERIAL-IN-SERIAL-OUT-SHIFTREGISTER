@@ -25,18 +25,55 @@ Each D flip-flop in the circuit has a Data (D) input, a Clock (CLK) input, and a
 
 **Procedure**
 
-/* write all the steps invloved */
+1.Declare a Verilog module named EXP11 with input ports clk, rst, sin, and an output port q.
+
+2.Declare input ports: clk for the clock signal, rst for the reset signal, and sin for the input signal. Also, declare the output port q as a 4-bit vector representing the state of flip-flops.
+
+3.Declare an internal register q as a 4-bit vector to store the state of the flip-flops.
+
+4.Create an always block that triggers on the positive edge of both the clock (clk) and the reset signal (rst), containing the following steps:
+
+5.If the reset signal is asserted (rst), assign q to 4'b0000 to reset all flip-flops to 0.
+
+6.If the reset signal is not asserted, assign the value of sin to the first flip-flop (q[0]) and shift the values of q to the right.
+
+7.End the module declaration.
+
 
 **PROGRAM**
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming.
+```
+Program for flipflops and verify its truth table in quartus using Verilog programming.
 
-Developed by: RegisterNumber:
 
-*/
+
+Name: Tarun S
+RegisterNumber:212223040226
+```
+```
+module siso(clk, sin, q);
+    input clk;      // Clock input
+    input sin;      // Serial input
+    output [3:0] q; // 4-bit shift register output
+    reg [3:0] q;    // Internal 4-bit register to hold the shift register value
+
+    always @(posedge clk) 
+	 begin
+        q[0] <= sin;   // Load the serial input to the least significant bit
+        q[1] <= q[0];  // Shift previous bit to the next bit
+        q[2] <= q[1];  // Continue shifting
+        q[3] <= q[2];  // Continue shifting
+    end
+endmodule
+
+```
 
 **RTL LOGIC FOR SISO Shift Register**
+![Screenshot 2024-11-12 051423](https://github.com/user-attachments/assets/947c9b9d-98d6-40dc-b77e-309b1811f4d6)
 
 **TIMING DIGRAMS FOR SISO Shift Register**
+![Screenshot 2024-11-12 051350](https://github.com/user-attachments/assets/e6452a3a-3612-4eb9-bfac-36dd9b52556a)
 
 **RESULTS**
+
+Thus,SISO Shift Register using verilog and validating their functionality using their functional tables has successful execution of the program.
